@@ -1,0 +1,3 @@
+Flask
+python-dotenv
+pycopg2-binary
