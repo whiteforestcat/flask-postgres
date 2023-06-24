@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
 import os
 import psycopg2
 from dotenv import load_dotenv
@@ -13,6 +13,16 @@ connection = psycopg2.connect(url)  # connect to DB
 @app.route("/")
 def home():
     return "hello world"
+
+
+@app.get("/api/alljobs")
+def all_jobs():
+    # data = request.get_json() # no need for GET
+    with connection:
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT * FROM jobs")
+            rows = cursor.fetchall()
+            return jsonify(rows[0][1])
 
 
 @app.post("/api/job")
