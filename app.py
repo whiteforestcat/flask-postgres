@@ -22,6 +22,7 @@ def all_jobs():
         with connection.cursor() as cursor:
             cursor.execute("SELECT * FROM jobs")
             rows = cursor.fetchall()
+            print(rows[0][1])
             return jsonify(rows[0][1])
 
 
